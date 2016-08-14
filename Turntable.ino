@@ -25,7 +25,7 @@ char keys[ROWS][COLS] = {
   {'C','D','E','F'}
 };
 byte rowPins[ROWS] = {9,8,7,6}; //connect to the row pinouts of the keypad
-byte colPins[COLS] = {10,11,12,5}; //connect to the column pinouts of the keypad
+byte colPins[COLS] = {10,11,12,13}; //connect to the column pinouts of the keypad
 
 Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
@@ -33,7 +33,7 @@ Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
 // Define a stepper and the pins it will use
 AccelStepper stepper(1,3,2); // Defaults to AccelStepper::FULL4WIRE (4 pins) on 2, 3, 4, 5
-AccelStepper stepper2(1,13,4); // Defaults to AccelStepper::FULL4WIRE (4 pins) on 2, 3, 4, 5
+AccelStepper stepper2(1,5,4); // Defaults to AccelStepper::FULL4WIRE (4 pins) on 2, 3, 4, 5
 
 
 void setup()
@@ -44,10 +44,10 @@ void setup()
   // Change these to suit your stepper if you want
   stepper.setMaxSpeed(speedStepper); //50 is ok!
   stepper.setAcceleration(4000); //1000 is ok
-  stepper.moveTo(3200);
+  stepper.moveTo(1000);
   stepper2.setMaxSpeed(speedStepper2); //50 is ok!
   stepper2.setAcceleration(4000); //1000 is ok
-  stepper2.moveTo(3200);
+  stepper2.moveTo(1000);
   
 
 }
@@ -96,8 +96,8 @@ void keypadEvent(KeypadEvent key){
 
 
         if (key == '1') {
-            speedStepper += 1000 ;
-            if(speedStepper>4000) { speedStepper=1000; }
+            speedStepper += 2000 ;
+            if(speedStepper>3000) { speedStepper=50; }
               stepper.setMaxSpeed(speedStepper);
                 stepper.setAcceleration(speedStepper); //1000 is ok
 
@@ -105,9 +105,9 @@ void keypadEvent(KeypadEvent key){
 
         if (key == '5') {
           speedStepper2 += 1000 ;
-            if(speedStepper2>4000) { speedStepper2=1000; }
+            if(speedStepper2>8000) { speedStepper2=1000; }
               stepper2.setMaxSpeed(speedStepper2);
-                stepper2.setAcceleration(speedStepper2); //1000 is ok
+                //stepper2.setAcceleration(speedStepper2); //1000 is ok
 
 
         }
